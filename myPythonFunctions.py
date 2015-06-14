@@ -53,7 +53,7 @@ def generateQuestion():
 	for operand in range(len(operandList)):
 		operandList[operand] = random.randint(1, 9)
 
-	#only operations menors than 50000
+	#only operations lesser than 50000 and greater than -50000
 	while True:
 		for operator in range(len(operatorList)):
 			operatorList[operator] = operatorDict[random.randint(1, 5)]
@@ -69,7 +69,7 @@ def generateQuestion():
 				questionString += str(operandList[number]) + operatorList[number]
 
 		result = eval(questionString)
-		if result <= 50000:
+		if result <= 50000 and result >= -50000:
 			break
 
 	#Display question
