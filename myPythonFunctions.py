@@ -48,16 +48,16 @@ def updateUserPoints(newUser, userName, score):
 			
 def generateQuestion():
 	operandList, operatorList = [0,0,0,0,0], ['','','','']
-	operatorDict = {1:"+", 2:"-", 3:"*", 4:"**"}
+	operatorDict = {1:"+", 2:"-", 3:"*", 4:"/", 5:"**"}
 
 	for operand in range(len(operandList)):
 		operandList[operand] = random.randint(1, 9)
 
 	for operator in range(len(operatorList)):
-		operatorList[operator] = operatorDict[random.randint(1, 4)]
+		operatorList[operator] = operatorDict[random.randint(1, 5)]
 		if operator > 0:
 			if operatorList[operator] == operatorList[operator-1]:
-				operatorList[operator] = operatorDict[random.randint(1, 3)]
+				operatorList[operator] = operatorDict[random.randint(1, 4)]
 			
 	questionString = ''
 	for number in range(len(operandList)):
@@ -70,11 +70,12 @@ def generateQuestion():
 
 	#Display question
 	questionString = questionString.replace('**','^')
-	print('What is the result of ' + questionString + ' ?')
+	print('What is the result of ' + questionString + ' ?'
+	'(round your answer)')
 	userAnswer = input()
 
 	try:
-		if(int(userAnswer) == result):
+		if(round(int(userAnswer)) == round(result)):
 			print('Keep it up!')
 			return 1
 		else:
@@ -82,7 +83,7 @@ def generateQuestion():
 			return 0
 	except Exception as e:
 		print(e)
-		print('\nEscribe un número')
+		print('\nYou must type a number')
 	
 def fileNotFound():
 	print('File not found, creating file')
