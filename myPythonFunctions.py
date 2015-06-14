@@ -53,20 +53,24 @@ def generateQuestion():
 	for operand in range(len(operandList)):
 		operandList[operand] = random.randint(1, 9)
 
-	for operator in range(len(operatorList)):
-		operatorList[operator] = operatorDict[random.randint(1, 5)]
-		if operator > 0:
-			if operatorList[operator] == operatorList[operator-1]:
-				operatorList[operator] = operatorDict[random.randint(1, 4)]
+	#only operations menors than 50000
+	while True:
+		for operator in range(len(operatorList)):
+			operatorList[operator] = operatorDict[random.randint(1, 5)]
+			if operator > 0:
+				if operatorList[operator] == operatorList[operator-1]:
+					operatorList[operator] = operatorDict[random.randint(1, 4)]
 			
-	questionString = ''
-	for number in range(len(operandList)):
-		if number == len(operandList)-1 :
-			questionString += str(operandList[number])
-		else:
-			questionString += str(operandList[number]) + operatorList[number]
+		questionString = ''
+		for number in range(len(operandList)):
+			if number == len(operandList)-1 :
+				questionString += str(operandList[number])
+			else:
+				questionString += str(operandList[number]) + operatorList[number]
 
-	result = eval(questionString)
+		result = eval(questionString)
+		if result <= 50000:
+			break
 
 	#Display question
 	questionString = questionString.replace('**','^')
